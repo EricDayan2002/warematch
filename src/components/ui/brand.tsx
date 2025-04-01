@@ -1,15 +1,9 @@
 import Link from "next/link"
 
-import { Icons } from "@/icons"
-
-const Brand = () => {
+export function Brand() {
 	return (
-		<>
-			<Link href="/">
-				<Icons.flower aria-label="Flower icon" />
-			</Link>
-		</>
+		<Link href="/" className="flex items-center">
+			<span className="text-2xl font-bold text-blue-900 dark:text-blue-100">WAREMATCH</span>
+		</Link>
 	)
 }
-
-export { Brand }

@@ -12,18 +12,18 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-	title: siteConfig.title,
-	description: siteConfig.description
+	title: "Listings App",
+	description: "View and manage property listings"
 }
 
 export default function RootLayout({
 	children
-}: Readonly<{
-	children: React.ReactNode
-}>) {
+}: {
+	children: React.ReactNode;
+}) {
 	return (
-		<html lang="en">
-			<body className={inter.className}>
+		<html lang="en" suppressHydrationWarning>
+			<body className={inter.className} suppressHydrationWarning>
 				<Providers>
 					<Header />
 

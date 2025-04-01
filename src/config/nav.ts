@@ -1,10 +1,6 @@
 export const navConfig = [
 	{
-		title: "Home",
+		title: "WareMatch",
 		href: "/"
-	},
-	{
-		title: "Dashboard",
-		href: "/dashboard"
 	}
 ]

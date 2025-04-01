@@ -1,63 +1,127 @@
-# Next.js Boilerplate
+# WareMatch
 
-An open source boilerplate built using **Next.js 14**, **TypeScript**, and **Tailwind CSS**
+## Prerequisites
+- Node.js 18.17 or later
+- npm package manager
 
-## Features
+## Installation
 
-With this template, you get all the awesomeness you need:
-
-- Advanced Folder Structures
-- [Next.js](https://nextjs.org/) with App Router support
-- Type checking [TypeScript](https://www.typescriptlang.org/)
-- Styled using [Tailwind CSS](https://tailwindcss.com/)
-- State management with [Zustand](https://zustand-demo.pmnd.rs/)
-- Authentication with [NextAuth.js](https://next-auth.js.org/)
-- UI Components built with [shadcn/ui](https://ui.shadcn.com/)
-- Data Fetching, Caching and Mutation with [TanStack Query](https://tanstack.com/query/latest)
-- Linter with [ESLint](https://eslint.org/)
-- Code Formatter with [Prettier](https://prettier.io/)
-- Form handling with [React Hook Form](https://react-hook-form.com/)
-- Validation library with [Zod](https://zod.dev/)
-- [Storybook](https://storybook.js.org/) for UI development
-- Beautiful and consistent icons from [Lucide](https://lucide.dev/)
-- Loading UI using [Skeleton Components](https://ui.shadcn.com/docs/components/skeleton)
-- Dark theme with [next-themes](https://npmjs.com/package/next-themes)
-- [Absolute Imports](https://nextjs.org/docs/pages/building-your-application/configuring/absolute-imports-and-module-aliases) with `@` prefix
-- [Husky](https://typicode.github.io/husky/) for Git Hooks
-- Sitemap.xml and robots.txt with [next-sitemap](https://www.npmjs.com/package/next-sitemap)
-- Metadata files optimized for SEO
-- Storage helpers for Local, Session, Cookies
-- 💯 Maximize lighthouse score
-
-## Project structure
-
-```shell
-│
-├── public                          # Public assets folder
-├── src
-│   ├── app                         # Next JS App (App Router)
-│   ├── components                  # React components
-│   │   ├── features                # Containing logic operations
-│   │   ├── shared                  # Header, footer, aside components
-│   │   ├── skeletons               # Loading components
-│   │   ├── ui                      # Atomic components
-│   │   └── widgets                 # Advanced components
-│   ├── config                      # Configuration files
-│   ├── data                        # Static or mock data
-│   ├── helpers                     # Helper functions
-│   ├── hooks                       # React hooks
-│   ├── lib                         # Utilities folder
-│   ├── providers                   # All providers
-│   ├── services                    # API services
-│   ├── stores                      # Zustand stores
-│   └── types                       # Type definitions
-├── .eslintrc.json                  # ESLint configuration
-├── .prettierrc                     # Prettier configuration
-├── components.json                 # shadcn/ui configuration
-├── next-sitemap.config.js          # next-sitemap configuration
-├── next.config.mjs                 # Next.js configuration
-├── postcss.config.js               # PostCSS configuration
-├── README.md                       # README file
-├── tailwind.config.js              # Tailwind CSS configuration
-└── tsconfig.json                   # TypeScript configuration
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/warematch.git
+cd warematch
 ```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+## Development
+
+Start the development server:
+```bash
+npm run dev
+```
+
+The application will be available at [http://localhost:3000](http://localhost:3000)
+
+## Production Build
+
+1. Build the application:
+```bash
+npm run build
+```
+
+2. Start the production server:
+```bash
+npm run start
+```
+
+## Technical Implementation
+
+### Code Quality & Structure
+- **Modular Architecture**: Components are organized by feature and responsibility
+- **Clean Code Practices**: Consistent naming conventions and code formatting
+- **Reusable Components**: Shared UI components in `src/components/ui`
+- **Custom Hooks**: Abstracted complex logic into reusable hooks in `src/hooks`
+
+### TypeScript Implementation
+- **Strong Type Definitions**: 
+```typescript
+// Example of discriminated union for listing types
+type ListingType = 'sublease' | '3PL';
+
+interface BaseListing {
+  id: string;
+  listingType: ListingType;
+  price: number;
+}
+
+interface SubleaseListing extends BaseListing {
+  listingType: 'sublease';
+  squareFootage: number;
+  pricePerSqft: number;
+}
+```
+- **Type Guards**: Implemented for safe type narrowing
+- **Generic Components**: Reusable components with type parameters
+- **Strict Type Checking**: Enabled strict TypeScript configuration
+
+### UI/UX Implementation
+- **ShadCN Components**: Utilized modern UI components
+- **Responsive Design**: Mobile-first approach with Tailwind breakpoints
+- **Dark Mode**: Implemented with next-themes
+- **Loading States**: Skeleton loaders for better UX
+- **Error Handling**: User-friendly error messages
+
+### API Integration
+```typescript
+// Example of API call with error handling
+const useListings = () => {
+  const { data, error, isLoading } = useSWR<Listing[]>('/api/listings', fetcher);
+  
+  if (error) {
+    // Error handling with user feedback
+    toast.error('Failed to load listings');
+  }
+
+  return {
+    listings: data,
+    isLoading,
+    error
+  };
+};
+```
+
+### Problem-Solving Approaches
+
+#### 1. State Management
+**Challenge**: Complex sorting and filtering states
+**Solution**: 
+- Implemented custom hooks for state logic
+- Used TypeScript for type-safe state management
+- Maintained separate states for different listing types
+
+#### 2. Type Safety
+**Challenge**: Handling different listing types and calculations
+**Solution**: 
+- Created discriminated unions
+- Implemented type guards
+- Used generic types for reusable components
+
+#### 3. Performance
+**Challenge**: Optimizing for large datasets
+**Solution**: 
+- Implemented efficient sorting algorithms
+- Used proper React rendering optimizations
+- Optimized image loading with Next.js
+
+#### 4. User Experience
+**Challenge**: Creating intuitive sorting interface
+**Solution**: 
+- Clear visual feedback for active sorts
+- Smooth transitions between states
+- Consistent error handling
+
+
